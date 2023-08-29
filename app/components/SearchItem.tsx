@@ -16,8 +16,7 @@ export const SearchItem = ({ show }: Props) => {
   return (
     <div
       key={show.id}
-      className="mb-2 flex w-full flex-row items-start"
-      style={{ height: 59 }}
+      className="mb-2 flex w-full flex-row items-start rounded-lg p-2 hover:bg-slate-800"
     >
       {!!imgSrc && (
         <Image
@@ -41,7 +40,7 @@ export const SearchItem = ({ show }: Props) => {
           <h3 className="text-base text-white">{show.name}</h3>
           <p className="text-sm text-slate-400">{show.name}</p>
         </div>
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between pr-2">
           <p className="text-right text-sm text-slate-400">{timeString}</p>
           <span className="flex items-center justify-end text-sm text-slate-400">
             <svg

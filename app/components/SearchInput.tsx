@@ -11,7 +11,7 @@ export const SearchInput = ({
 }: SearchInputProps) => {
   return (
     <form
-      className="mb-4 w-full max-w-md"
+      className="w-full max-w-md"
       onSubmit={(e) => {
         e.preventDefault()
         onSubmit()

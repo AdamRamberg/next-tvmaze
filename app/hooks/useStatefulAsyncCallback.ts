@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react"
 
-const SLOW_THRESHOLD = 1000
+const SLOW_THRESHOLD = 2000
+const LOADING_THRESHOLD = 200
 
 export const useStatefulAsyncCallback = <
   R,
@@ -11,12 +12,13 @@ export const useStatefulAsyncCallback = <
   onSuccess: (() => void) | undefined = undefined,
   onError: (() => void) | undefined = undefined,
   slowThreshold = SLOW_THRESHOLD,
+  loadingThreshold = LOADING_THRESHOLD,
 ): [
   R,
   (...params: Parameters<T>) => Promise<void>,
   { isLoading: boolean; isSlow: boolean; error: undefined | Error },
 ] => {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<Error | undefined>(undefined)
   const [isSlow, setIsSlow] = useState(false)
   const [result, setResult] = useState<R>(initialResult)
@@ -25,11 +27,14 @@ export const useStatefulAsyncCallback = <
     async (...params: Parameters<T>) => {
       setError(undefined)
       setIsSlow(false)
-      setIsLoading(true)
 
-      const timeout = setTimeout(() => {
+      const slowTimeout = setTimeout(() => {
         setIsSlow(true)
       }, slowThreshold)
+
+      const loadingTimeout = setTimeout(() => {
+        setIsLoading(true)
+      }, loadingThreshold)
 
       try {
         const res = await asyncCallback(...params)
@@ -41,11 +46,12 @@ export const useStatefulAsyncCallback = <
         }
         onError?.()
       } finally {
-        clearTimeout(timeout)
+        clearTimeout(slowTimeout)
+        clearTimeout(loadingTimeout)
         setIsLoading(false)
       }
     },
-    [asyncCallback, slowThreshold, onSuccess, onError],
+    [asyncCallback, slowThreshold, loadingThreshold, onSuccess, onError],
   )
 
   return [result, runAsyncCallback, { isLoading, isSlow, error }]
