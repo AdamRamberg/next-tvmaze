@@ -29,3 +29,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [ ] Add unit testing with Jest and React Testing Library.
 - [ ] Skeleton component as fallback for `<Suspense />` in search page.
 - [ ] Better fetch status and error handling in show page.
+- [ ] Adding offline indicator using `Navigator: onLine property`.
+- [ ] Implement dark mode.
