@@ -19,7 +19,7 @@ export const useStatefulAsyncCallback = <
   { isLoading: boolean; isSlow: boolean; error: undefined | Error },
 ] => {
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<Error | undefined>(undefined)
+  const [error, setError] = useState<Error | undefined>()
   const [isSlow, setIsSlow] = useState(false)
   const [result, setResult] = useState<R>(initialResult)
 

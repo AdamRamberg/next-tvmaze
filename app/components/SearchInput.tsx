@@ -44,7 +44,7 @@ export const SearchInput = ({
         <input
           type="search"
           id="search-input"
-          className="block w-full rounded-lg bg-slate-800 p-2 pl-10 text-sm text-white placeholder-slate-400 shadow-sm focus:ring-blue-500 lg:p-4 lg:pl-10"
+          className="block w-full rounded-lg border-slate-800 bg-slate-800 p-2 pl-10 text-sm text-white placeholder-slate-400 shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-300 lg:p-4 lg:pl-10"
           placeholder="Search shows..."
           required
           value={value}

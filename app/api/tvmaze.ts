@@ -14,7 +14,9 @@ export const fetchShows = async (
     return []
   }
   const result = await fetch(`${BASE_URL}/search/shows?q=${searchQuery}`)
-  await sleep(sleepTime)
+  if (sleepTime !== 0) {
+    await sleep(sleepTime)
+  }
   const json = (await result.json()) as ShowResult[]
   return json.reduce<Show[]>((acc, cur) => {
     if (cur.show) {
@@ -22,4 +24,19 @@ export const fetchShows = async (
     }
     return acc
   }, [])
+}
+
+export const fetchShow = async (
+  id: string | null | undefined,
+  sleepTime: number = 0,
+): Promise<Show | null> => {
+  if (id == null) {
+    return null
+  }
+  const result = await fetch(`${BASE_URL}/shows/${id}`)
+  if (sleepTime !== 0) {
+    await sleep(sleepTime)
+  }
+  const json = await result.json()
+  return json
 }

@@ -25,20 +25,23 @@ export const SearchResult = ({ initialShows = [], query = "" }: Props) => {
   }, [query, updateShows, updateSearchQuery])
 
   return (
-    <div className="relative flex w-full max-w-md flex-col overflow-hidden">
+    <div className="relative flex w-full max-w-md flex-col overflow-y-hidden">
       <div className="relative my-1 h-6 w-full flex-row">
         <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-row items-center justify-between">
-          {isLoading && (
+          {error && (
+            <p className="mr-4 text-sm text-red-400">Something went wrong...</p>
+          )}
+          {!error && isLoading && (
             <p className="mr-4 text-sm text-slate-400">Loading...</p>
           )}
-          {isLoading && isSlow && (
+          {!error && isLoading && isSlow && (
             <p className="text-sm text-slate-400 text-yellow-300">
               Search seems slower than usual
             </p>
           )}
         </div>
       </div>
-      <div className="overflow-y-scroll pb-8">
+      <div className="overflow-y-scroll p-1 pb-8">
         {shows.map((show) => {
           return <SearchItem key={show.id} show={show} />
         })}
