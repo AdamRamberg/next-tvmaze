@@ -6,9 +6,14 @@ export const ShowPageContent = ({ show }: { show: Show }) => {
 
   return (
     <div>
-      <div className="flex flex-row">
-        <ShowImage src={imgSrc} name={show.name} size={ImageSize.Large} />
-        <ul className="p-2 text-sm md:text-base">
+      <div className="flex flex-col md:flex-row">
+        <ShowImage
+          src={imgSrc}
+          name={show.name}
+          size={ImageSize.Large}
+          className="md:mr-6"
+        />
+        <ul className="py-4 text-sm md:p-2 md:text-base">
           <li className="mb-2">
             <span className="pr-2 font-extrabold">Genres: </span>
             {show.genres.join(", ")}
@@ -40,12 +45,12 @@ export const ShowPageContent = ({ show }: { show: Show }) => {
       </div>
       {show.summary && (
         <div
-          className="py-6 text-sm md:text-base"
+          className="pb-4 text-sm md:py-6 md:text-base"
           dangerouslySetInnerHTML={{ __html: show.summary }}
         />
       )}
       {!show.summary && (
-        <div className="py-6 text-sm md:text-base">
+        <div className="pb-4 text-sm md:py-6 md:text-base">
           <p className="text-slate-400">No summary available...</p>
         </div>
       )}

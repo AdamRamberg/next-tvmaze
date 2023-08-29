@@ -4,6 +4,7 @@ type Props = {
   src: string | undefined
   name: string
   size: ImageSize
+  className?: string
 }
 
 export enum ImageSize {
@@ -25,7 +26,7 @@ const getMultiplier = (size: ImageSize) => {
   }
 }
 
-export const ShowImage = ({ src, name, size }: Props) => {
+export const ShowImage = ({ src, name, size, className }: Props) => {
   const baseWidth = 42
   const baseHeight = Math.floor(42 * 1.4)
   const sizeMultiplier = getMultiplier(size)
@@ -39,14 +40,16 @@ export const ShowImage = ({ src, name, size }: Props) => {
           alt={name}
           src={src}
           width={width}
-          height="auto"
-          className="mr-6 shrink-0 grow-0"
+          height={height}
+          className={`${!!className ? className : ""}`}
         />
       )}
       {!src && (
         <div
           style={{ width, height }}
-          className="mr-6 flex shrink-0 grow-0 items-center justify-center bg-slate-800 text-center text-xs text-slate-400"
+          className={`${
+            !!className ? className : ""
+          }} items-center justify-center bg-slate-800 text-center text-xs text-slate-400`}
         >
           Image missing
         </div>

@@ -19,7 +19,12 @@ export const SearchItem = ({ show }: Props) => {
       href={`/show/${show.id}`}
       className="mb-2 flex w-full flex-row items-start rounded-lg p-1 outline-none hover:bg-slate-800 focus:outline-none focus:ring-1 focus:ring-sky-300"
     >
-      <ShowImage src={imgSrc} name={show.name} size={ImageSize.Small} />
+      <ShowImage
+        src={imgSrc}
+        name={show.name}
+        size={ImageSize.Small}
+        className="mr-6 flex shrink-0 grow-0"
+      />
       <div className="flex h-max shrink grow flex-row justify-between py-2">
         <div className="flex flex-col">
           <h3 className="text-base text-white">{show.name}</h3>
