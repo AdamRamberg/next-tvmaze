@@ -1,10 +1,10 @@
-import { Show } from "../types"
+import { ShowResult } from "../types"
 
 const BASE_URL = "https://api.tvmaze.com"
 
 export const fetchShows = async (
   searchQuery: string | null | undefined,
-): Promise<Show[]> => {
+): Promise<ShowResult[]> => {
   if (searchQuery == null) {
     return []
   }
