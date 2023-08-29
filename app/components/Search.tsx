@@ -3,10 +3,10 @@
 import { Suspense, useState } from "react"
 import { SearchResult } from "./SearchResult"
 import { SearchInput } from "./SearchInput"
-import { ShowResult } from "../types"
+import { Show } from "../types"
 
 type Props = {
-  initialShows: ShowResult[]
+  initialShows: Show[]
   initialSearchQuery: string | undefined
 }
 

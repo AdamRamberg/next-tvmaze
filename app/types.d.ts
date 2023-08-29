@@ -10,5 +10,5 @@ export type Show = {
 }
 
 export type ShowResult = {
-  show: Show
+  show?: Show
 }

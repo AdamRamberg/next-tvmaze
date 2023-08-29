@@ -2,12 +2,12 @@
 
 import { useEffect } from "react"
 import { SearchItem } from "./SearchItem"
-import { ShowResult } from "../types"
+import { Show } from "../types"
 import { fetchShows } from "../api/tvmaze"
 import { useUpdateSearchParam, useStatefulAsyncCallback } from "../hooks"
 
 type Props = {
-  initialShows: ShowResult[]
+  initialShows: Show[]
   query: string | undefined
 }
 
@@ -39,7 +39,7 @@ export const SearchResult = ({ initialShows = [], query = "" }: Props) => {
         </div>
       </div>
       <div className="overflow-y-scroll pb-8">
-        {shows.map(({ show }) => {
+        {shows.map((show) => {
           return <SearchItem key={show.id} show={show} />
         })}
       </div>

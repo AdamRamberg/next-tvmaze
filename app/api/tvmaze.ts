@@ -1,4 +1,4 @@
-import { ShowResult } from "../types"
+import { Show, ShowResult } from "../types"
 
 const BASE_URL = "https://api.tvmaze.com"
 
@@ -9,12 +9,17 @@ const sleep = async (time: number) => {
 export const fetchShows = async (
   searchQuery: string | null | undefined,
   sleepTime: number = 0,
-): Promise<ShowResult[]> => {
+): Promise<Show[]> => {
   if (searchQuery == null) {
     return []
   }
   const result = await fetch(`${BASE_URL}/search/shows?q=${searchQuery}`)
   await sleep(sleepTime)
-  const json = await result.json()
-  return json
+  const json = (await result.json()) as ShowResult[]
+  return json.reduce<Show[]>((acc, cur) => {
+    if (cur.show) {
+      acc.push(cur.show)
+    }
+    return acc
+  }, [])
 }
