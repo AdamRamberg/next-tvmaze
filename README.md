@@ -31,3 +31,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [ ] Better fetch status and error handling in show page.
 - [ ] Adding offline indicator using `Navigator: onLine property`.
 - [ ] Implement dark mode.
+- [ ] Handle 404 error in API call instead of in React component.
