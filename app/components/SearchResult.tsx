@@ -25,7 +25,7 @@ export const SearchResult = ({ initialShows = [], query = "" }: Props) => {
   }, [query, updateShows, updateSearchQuery])
 
   return (
-    <div className="relative flex w-full max-w-md flex-col">
+    <div className="relative flex w-full max-w-md flex-col overflow-hidden">
       <div className="relative my-1 h-6 w-full flex-row">
         <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-row items-center justify-between">
           {isLoading && (
@@ -38,9 +38,12 @@ export const SearchResult = ({ initialShows = [], query = "" }: Props) => {
           )}
         </div>
       </div>
-      {shows.map(({ show }) => {
-        return <SearchItem key={show.id} show={show} />
-      })}
+      <div className="overflow-y-scroll pb-8">
+        {shows.map(({ show }) => {
+          return <SearchItem key={show.id} show={show} />
+        })}
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-slate-900 from-slate-900" />
     </div>
   )
 }
