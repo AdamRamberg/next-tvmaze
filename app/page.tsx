@@ -1,4 +1,5 @@
-import SearchPageContent from "./components/SearchPageContent"
+import { Suspense } from "react"
+import Search from "./components/Search"
 import { fetchShows } from "./api/tvmaze"
 
 type Props = {
@@ -6,12 +7,18 @@ type Props = {
 }
 
 export default async function SearchPage(props: Props) {
-  const searchQuery = props.searchParams.q
-  const initialShows = await fetchShows(searchQuery)
+  const initialSearchQuery = props.searchParams.q
+  const initialShows = await fetchShows(initialSearchQuery)
+
   return (
-    <SearchPageContent
-      initialShows={initialShows}
-      initialSearchQuery={searchQuery}
-    />
+    <main className="flex min-h-screen flex-col items-center p-24">
+      <h1>TVMaze Next</h1>
+      <Suspense>
+        <Search
+          initialShows={initialShows}
+          initialSearchQuery={initialSearchQuery}
+        />
+      </Suspense>
+    </main>
   )
 }
