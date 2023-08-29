@@ -49,7 +49,7 @@ export const ShowImage = ({ src, name, size, className }: Props) => {
           style={{ width, height }}
           className={`${
             !!className ? className : ""
-          }} items-center justify-center bg-slate-800 text-center text-xs text-slate-400`}
+          }} flex items-center justify-center bg-slate-800 text-center text-xs text-slate-400`}
         >
           Image missing
         </div>

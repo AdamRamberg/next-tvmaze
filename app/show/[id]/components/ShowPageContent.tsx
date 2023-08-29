@@ -16,7 +16,7 @@ export const ShowPageContent = ({ show }: { show: Show }) => {
         <ul className="py-4 text-sm md:p-2 md:text-base">
           <li className="mb-2">
             <span className="pr-2 font-extrabold">Genres: </span>
-            {show.genres.join(", ")}
+            {show.genres?.join(", ") || "-"}
           </li>
           <li className="mb-2">
             <span className="pr-2 font-extrabold">Language: </span>

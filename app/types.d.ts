@@ -9,7 +9,7 @@ export type Show = {
   rating?: { average: number | null }
   genres: string[]
   language: string
-  status: string
+  status: string | number
   type: string
   officialSite?: string
   summary?: string
