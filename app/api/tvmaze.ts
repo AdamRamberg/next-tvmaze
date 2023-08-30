@@ -14,7 +14,10 @@ export const fetchShows = async (
     return []
   }
   const result = await fetch(`${BASE_URL}/search/shows?q=${searchQuery}`)
-  if (sleepTime !== 0) {
+  if (!result.ok) {
+    throw new Error(result.statusText)
+  }
+  if (sleepTime > 0) {
     await sleep(sleepTime)
   }
   const json = (await result.json()) as ShowResult[]
@@ -34,7 +37,10 @@ export const fetchShow = async (
     return null
   }
   const result = await fetch(`${BASE_URL}/shows/${id}`)
-  if (sleepTime !== 0) {
+  if (!result.ok) {
+    throw new Error(result.statusText)
+  }
+  if (sleepTime > 0) {
     await sleep(sleepTime)
   }
   const json = await result.json()

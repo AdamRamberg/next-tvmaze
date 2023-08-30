@@ -7,9 +7,8 @@ type Props = {
 }
 
 export default async function ShowPage({ params: { id } }: Props) {
-  const show = await fetchShow(id)
-  const wasFound = show?.status !== 404
-  const showTitle = wasFound ? show?.name : `Show with id "${id}" is unknown`
+  const show = await fetchShow(id).catch(() => null)
+  const showTitle = show?.name ?? `Unknown show with id "${id}"`
 
   return (
     <main className="flex max-h-screen min-h-screen flex-col items-start overflow-x-hidden overflow-y-scroll bg-slate-900 px-6 py-12 lg:px-12">
@@ -19,7 +18,7 @@ export default async function ShowPage({ params: { id } }: Props) {
           {showTitle}
         </h1>
       </div>
-      {!!show && wasFound && <ShowPageContent show={show} />}
+      {!!show && <ShowPageContent show={show} />}
     </main>
   )
 }
