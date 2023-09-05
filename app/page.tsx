@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import Search from "./components/Search"
-import { fetchShows } from "./api/tvmaze"
+import { serverAPI } from "./api/server"
 
 type Props = {
   searchParams: { [key: string]: string | undefined }
@@ -8,7 +8,7 @@ type Props = {
 
 export default async function SearchPage(props: Props) {
   const initialSearchQuery = props.searchParams.q
-  const initialShows = await fetchShows(initialSearchQuery)
+  const initialShows = await serverAPI.fetchShows(initialSearchQuery)
 
   return (
     <main className="flex max-h-screen min-h-screen flex-col items-center overflow-hidden bg-slate-900 px-6 py-12 pb-0 lg:px-12">

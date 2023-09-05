@@ -1,4 +1,4 @@
-import { fetchShow } from "../../api/tvmaze"
+import { serverAPI } from "../../api/server"
 import { BackButton } from "./components/BackButton"
 import { ShowPageContent } from "./components/ShowPageContent"
 
@@ -7,7 +7,7 @@ type Props = {
 }
 
 export default async function ShowPage({ params: { id } }: Props) {
-  const show = await fetchShow(id).catch(() => null)
+  const show = await serverAPI.fetchShow(id).catch(() => null)
   const showTitle = show?.name ?? `Unknown show with id "${id}"`
 
   return (

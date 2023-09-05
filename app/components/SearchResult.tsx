@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import { SearchItem } from "./SearchItem"
 import { Show } from "../types"
-import { fetchShows } from "../api/tvmaze"
+import { clientAPI } from "../api/client"
 import { useUpdateSearchParam, useStatefulAsyncCallback } from "../hooks"
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 
 export const SearchResult = ({ initialShows = [], query = "" }: Props) => {
   const [shows, updateShows, { isLoading, isSlow, error }] =
-    useStatefulAsyncCallback(fetchShows, initialShows)
+    useStatefulAsyncCallback(clientAPI.fetchShows, initialShows)
   const updateSearchQuery = useUpdateSearchParam("q")
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export const SearchResult = ({ initialShows = [], query = "" }: Props) => {
     if (!wasUpdated) {
       return
     }
-    updateShows(query)
+    updateShows({ searchParams: new URLSearchParams({ q: query }) })
   }, [query, updateShows, updateSearchQuery])
 
   return (
