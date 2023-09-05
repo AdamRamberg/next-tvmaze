@@ -4,25 +4,26 @@ import { useEffect } from "react"
 import { SearchItem } from "./SearchItem"
 import { Show } from "../types"
 import { clientAPI } from "../api/client"
+import { useSearchQuery } from "../contexts/SearchQueryContext"
 import { useUpdateSearchParam, useStatefulAsyncCallback } from "../hooks"
 
 type Props = {
   initialShows: Show[]
-  query: string | undefined
 }
 
-export const SearchResult = ({ initialShows = [], query = "" }: Props) => {
+export const SearchResultClient = ({ initialShows = [] }: Props) => {
   const [shows, updateShows, { isLoading, isSlow, error }] =
     useStatefulAsyncCallback(clientAPI.fetchShows, initialShows)
   const updateSearchQuery = useUpdateSearchParam("q")
+  const searchQuery = useSearchQuery()
 
   useEffect(() => {
-    const wasUpdated = updateSearchQuery(query)
+    const wasUpdated = updateSearchQuery(searchQuery)
     if (!wasUpdated) {
       return
     }
-    updateShows({ searchParams: new URLSearchParams({ q: query }) })
-  }, [query, updateShows, updateSearchQuery])
+    updateShows({ searchParams: new URLSearchParams({ q: searchQuery }) })
+  }, [searchQuery, updateShows, updateSearchQuery])
 
   return (
     <div className="relative flex w-full max-w-md flex-col overflow-y-hidden">

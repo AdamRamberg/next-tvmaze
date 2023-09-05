@@ -1,24 +1,36 @@
 "use client"
 
 import { Suspense, useState } from "react"
-import { SearchResult } from "./SearchResult"
 import { SearchInput } from "./SearchInput"
-import { Show } from "../types"
+import { SeachQueryProvider } from "../contexts/SearchQueryContext"
+import { SearchItemSkeleton } from "./SeachItemSkeleton"
 
 type Props = {
-  initialShows: Show[]
   initialSearchQuery: string | undefined
+  children: React.ReactNode
 }
 
-export default function Search({
-  initialShows = [],
-  initialSearchQuery = "",
-}: Props) {
+const Skeleton = () => {
+  return (
+    <div className="relative flex w-full max-w-md flex-col overflow-y-hidden">
+      <div className="relative my-1 h-6 w-full flex-row"></div>
+      <div className="overflow-y-scroll p-1 pb-8">
+        <SearchItemSkeleton />
+        <SearchItemSkeleton />
+        <SearchItemSkeleton />
+        <SearchItemSkeleton />
+        <SearchItemSkeleton />
+      </div>
+    </div>
+  )
+}
+
+export default function Search({ initialSearchQuery = "", children }: Props) {
   const [input, setInput] = useState(initialSearchQuery)
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery)
 
   return (
-    <>
+    <SeachQueryProvider value={searchQuery}>
       <SearchInput
         value={input}
         onChange={setInput}
@@ -26,9 +38,7 @@ export default function Search({
           setSearchQuery(input)
         }}
       />
-      <Suspense>
-        <SearchResult initialShows={initialShows} query={searchQuery} />
-      </Suspense>
-    </>
+      <Suspense fallback={<Skeleton />}>{children}</Suspense>
+    </SeachQueryProvider>
   )
 }
