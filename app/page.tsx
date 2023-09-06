@@ -1,5 +1,5 @@
 import Search from "./components/Search"
-import { SearchResultServer } from "./components/SearchResultServer"
+import { SearchResultServer } from "./components/SearchResult/server"
 
 type Props = {
   searchParams: Record<string, string | undefined>

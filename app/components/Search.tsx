@@ -3,26 +3,11 @@
 import { Suspense, useState } from "react"
 import { SearchInput } from "./SearchInput"
 import { SeachQueryProvider } from "../contexts/SearchQueryContext"
-import { SearchItemSkeleton } from "./SeachItemSkeleton"
+import { SearchResultSkeleton } from "./SearchResult/common"
 
 type Props = {
   initialSearchQuery: string | undefined
   children: React.ReactNode
-}
-
-const Skeleton = () => {
-  return (
-    <div className="relative flex w-full max-w-md flex-col overflow-y-hidden">
-      <div className="relative my-1 h-6 w-full flex-row"></div>
-      <div className="overflow-y-scroll p-1 pb-8">
-        <SearchItemSkeleton />
-        <SearchItemSkeleton />
-        <SearchItemSkeleton />
-        <SearchItemSkeleton />
-        <SearchItemSkeleton />
-      </div>
-    </div>
-  )
 }
 
 export default function Search({ initialSearchQuery = "", children }: Props) {
@@ -38,7 +23,7 @@ export default function Search({ initialSearchQuery = "", children }: Props) {
           setSearchQuery(input)
         }}
       />
-      <Suspense fallback={<Skeleton />}>{children}</Suspense>
+      <Suspense fallback={<SearchResultSkeleton />}>{children}</Suspense>
     </SeachQueryProvider>
   )
 }

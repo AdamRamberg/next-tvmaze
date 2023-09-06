@@ -1,5 +1,5 @@
-import { SearchResultClient } from "./SearchResultClient"
-import { serverAPI } from "../api/server"
+import { SearchResultClient } from "./client"
+import { serverAPI } from "../../api/server"
 
 type Props = {
   initialSearchQuery: string | undefined
@@ -8,7 +8,7 @@ type Props = {
 export const SearchResultServer = async ({
   initialSearchQuery = "",
 }: Props) => {
-  const initialShows = await serverAPI.fetchShows(initialSearchQuery, 5000)
+  const initialShows = await serverAPI.fetchShows(initialSearchQuery)
 
   return <SearchResultClient initialShows={initialShows} />
 }

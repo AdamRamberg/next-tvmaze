@@ -26,12 +26,17 @@ const getMultiplier = (size: ImageSize) => {
   }
 }
 
-export const ShowImage = ({ src, name, size, className }: Props) => {
+const getSize = (size: ImageSize) => {
   const baseWidth = 42
   const baseHeight = Math.floor(42 * 1.4)
   const sizeMultiplier = getMultiplier(size)
   const width = baseWidth * sizeMultiplier
   const height = baseHeight * sizeMultiplier
+  return { width, height }
+}
+
+export const ShowImage = ({ src, name, size, className }: Props) => {
+  const { width, height } = getSize(size)
 
   return (
     <>
@@ -55,5 +60,24 @@ export const ShowImage = ({ src, name, size, className }: Props) => {
         </div>
       )}
     </>
+  )
+}
+
+export const ShowImageSkeleton = ({
+  size,
+  className,
+}: {
+  size: ImageSize
+  className?: string
+}) => {
+  const { width, height } = getSize(size)
+
+  return (
+    <div
+      style={{ width, height }}
+      className={`${
+        !!className ? className : ""
+      }} flex items-center justify-center bg-slate-800 text-center text-xs text-slate-400`}
+    />
   )
 }
