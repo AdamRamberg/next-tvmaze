@@ -1,10 +1,7 @@
 import { Show, ShowResult } from "../types"
+import { sleep } from "./common"
 
 const BASE_URL = "https://api.tvmaze.com"
-
-const sleep = async (time: number) => {
-  return new Promise((resolve) => setTimeout(resolve, time))
-}
 
 export const fetchShows = async (
   searchQuery: string | null | undefined,
